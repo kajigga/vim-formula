@@ -1,8 +1,13 @@
 {% set config   = salt['pillar.get']('vim:config', {}) -%}
+{% set at_top   = salt['pillar.get']('vim:at_top', []) -%}
 {% set settings = salt['pillar.get']('vim:settings', {}) -%}
 {% set mappings = salt['pillar.get']('vim:mappings', {}) -%}
 {% set lets = salt['pillar.get']('vim:lets', {}) -%}
 {% set allow_localrc = salt['pillar.get']('vim:allow_localrc', {}) -%}
+{% for l in at_top -%}
+{{ l }}
+{% endfor -%}
+
 
 {% macro set_config(config, prefix='') -%}
 {% for parameter in config | sort -%}
